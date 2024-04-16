@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { GetSearchPost } from '../../hooks/useGetPost'
+import {  useGetSearchPost } from '../../hooks/useGetPost'
+
 
 function Search() {
   const navigate = useNavigate()
   const [value, setValue] = useState('')
   const { pathname } = useLocation()
-  const { loading, post } = GetSearchPost()
+  const [data] = useGetSearchPost()
 
 
   const onChange = (e) => {
@@ -17,11 +18,10 @@ function Search() {
   return (
     <>
       <input type="text" onChange={onChange} value={value || ''} />
-      { loading &&  <h1>loading</h1>}
       {
 
-        post && post.length > 0 ? (
-          post.map((p) => (
+        data && data.length > 0 ? (
+          data.map((p) => (
             <p key={p._id}>{p.content}</p>
           ))
         ) : (

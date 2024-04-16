@@ -17,7 +17,7 @@ const Home = () => {
         fetchPost();
       }, [])
   return (
-    <div>Home</div>
+    <div className='bg-red-500'>Home</div>
   )
 }
 
