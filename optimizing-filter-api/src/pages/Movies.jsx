@@ -6,21 +6,22 @@ import MovieList from '../components/MovieList';
 import SortMovie from '../components/SortMovie';
 import PaginationMovies from '../components/PaginationMovies';
 import PerPageMovies from '../components/PerPageMovies';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export const baseUrl = 'http://localhost:5000'
 const Movies = () => {
     const [page,setPage] = useState(1)
     const [sort,setSort] = useState({ sort: 'year' , order: 'asc' })
     const [search, setSearch] = useState('')
-    const [limit, setLimit] = useState(10)
+    const [limit, setLimit] = useState()
     const debounced = UseDebounce(search)
     const [obj, setObj] = useState({});
-    const {search:searchQuery,pathname} = useLocation()
-    console.log()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = UseDebounce(searchParams.get('search'));
     const getAllmovies = async () => {
+        console.log(limit)
         try {
-            const url = `${baseUrl}/movies?search=${debounced || ''}&limit=${limit}&sort=${sort.sort},${sort.order}&page=${page}`
+            const url = `${baseUrl}/movies?search=${query || ''}&limit=${limit}&sort=${sort.sort},${sort.order}&page=${page}`
             console.log({url})
             const res = await fetch(url)
             const data = await res.json();
@@ -33,8 +34,9 @@ const Movies = () => {
     }
     useEffect(() => {
         console.log()
+
         getAllmovies();
-    }, [debounced,sort.sort,sort.order,page,limit])
+    }, [debounced,sort.sort,sort.order,page,limit,query])
     return (
         <div className='  w-full flex flex-col space-y-6 items-center justify-center'>
             <h1 className='text-3xl font-bold'>Movies page</h1>
@@ -45,7 +47,7 @@ const Movies = () => {
                 <SearchInput setSearch={setSearch} />
             </div>
             <MovieList movies={obj.movies} />
-            <PaginationMovies page={page} setPage={setPage} limit={10} total={obj.total}/>
+            <PaginationMovies page={page} setPage={setPage} limit={limit} total={obj.total}/>
         </div>
     )
 }

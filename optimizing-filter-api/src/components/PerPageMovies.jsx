@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const skips = [3,5,10]
 const PerPageMovies = ({limit,setLimit}) => {
@@ -9,7 +10,7 @@ const PerPageMovies = ({limit,setLimit}) => {
   return (
     <select
     onChange={onChange}
-    defaultValue={limit}
+    defaultValue={limit || null}
     >
         {
             skips.map((skip)=>(
