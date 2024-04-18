@@ -9,7 +9,7 @@ const MovieList = ({ movies }) => {
                 movies && movies.length > 0 ?
                     (
                         movies.map((movie) => (
-                            <MovieItem movie={movie} key={movie.id} />
+                            <MovieItem movie={movie} key={movie._id} />
                         ))
                     ) : (<h1>Movies not found</h1>)
 
