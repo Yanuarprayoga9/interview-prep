@@ -8,7 +8,7 @@ import PaginationMovies from '../components/PaginationMovies';
 import PerPageMovies from '../components/PerPageMovies';
 import { useSearchParams } from 'react-router-dom';
 
-export const baseUrl = 'https://api-for-jkblc.vercel.app/jkb'
+export const baseUrl = 'https://api-for-jkblc-frontend.vercel.app'
 const Movies = () => {
     const [page,setPage] = useState(1)
     const [sort,setSort] = useState({ sort: 'year' , order: 'asc' })
