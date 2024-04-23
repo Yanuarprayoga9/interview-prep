@@ -8,7 +8,7 @@ import PaginationMovies from '../components/PaginationMovies';
 import PerPageMovies from '../components/PerPageMovies';
 import { useSearchParams } from 'react-router-dom';
 
-export const baseUrl = 'http://localhost:5000'
+export const baseUrl = 'https://api-for-jkblc.vercel.app/jkb'
 const Movies = () => {
     const [page,setPage] = useState(1)
     const [sort,setSort] = useState({ sort: 'year' , order: 'asc' })
@@ -38,10 +38,9 @@ const Movies = () => {
         getAllmovies();
     }, [debounced,sort.sort,sort.order,page,limit,query])
     return (
-        <div className='  w-full flex flex-col space-y-6 items-center justify-center'>
+        <div className='movieapp w-full flex flex-col space-y-6 items-center justify-center'>
             <h1 className='text-3xl font-bold'>Movies page</h1>
             <div className="w-full flex justify-around">
-
                 <SortMovie sort={sort} setSort={setSort} />
                 <PerPageMovies limit={limit} setLimit={setLimit}/>
                 <SearchInput setSearch={setSearch} />
